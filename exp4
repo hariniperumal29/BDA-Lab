@@ -1,0 +1,16 @@
+!pip install pyspark
+from pyspark.context import SparkContext
+sc = SparkContext.getOrCreate()
+rdd = sc.parallelize (["scala","hadoop","spark","hadoop vs spark","pyspark","spark vs pyspark","java"])
+total_count = rdd.count()
+print(total_count)
+
+spark_words = rdd.filter(lambda x: "spark" in x)
+spark_words_count = spark_words.count()
+print(spark_words_count)
+
+words = spark_words.collect()
+print(words)
+print(len(words))
+
+
