@@ -1,0 +1,9 @@
+! pip install pyspark
+from pyspark.context import SparkContext
+sc = SparkContext.getOrCreate()
+
+rdd1 = sc.parallelize ([("spark",1),("hadoop",4)])
+rdd2 = sc.parallelize ([("spark",2),("hadoop",5)])
+
+rdd = sorted (rdd1.join(rdd2).collect())
+print(rdd)
