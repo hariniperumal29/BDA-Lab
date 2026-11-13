@@ -1,0 +1,23 @@
+!pip install pyspark
+
+from pyspark.sql import SparkSession
+
+sc = SparkSession.builder.appName("Salary").getOrCreate()
+
+data = [
+    ("John","Hr","NY",20000,24,1000),
+    ("Ron","Sales","HU",300000,34,2000)
+]
+
+schema = ["emp_name","dept","State","salary","age","bonus"]
+
+rdd = sc.sparkContext.parallelize(data)
+
+print(rdd.take(5))
+
+df = sc.createDataFrame(data ,schema)
+df = rdd.toDF(schema)
+df.show()
+
+df.groupBy("State").sum("salary").filter("sum(salary)>100000").show()
+df.groupBy("State").sum("salary").orderBy("sum(salary)",ascending = False).show()
