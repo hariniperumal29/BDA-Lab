@@ -1,13 +1,13 @@
 !pip install pyspark
 from pyspark.sql import SparkSession
-sc = SparkSession.builder.appName("CSVRDD").getOrCreate()
+sc= SparkSession.builder.appName("CSVRDD").getOrCreate()
 
 rdd = sc.read.format("csv")\
-.option("header","true")\
-.option("inferSchema","true")\
-.load("Book1.csv").rdd
+      .option("header","true")\
+      .option("inferSchema","true")\
+      .load("Book1.csv").rdd
 
 print(rdd.take(5))
 
 df = rdd.toDF()
-print(df.describe().show())
+df.describe().show()
