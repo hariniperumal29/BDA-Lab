@@ -1,0 +1,42 @@
+# 1. Part Intialize spark
+!pip install pyspark
+from pyspark.sql import SparkSession
+sc = SparkSession .builder.appName("RDD").getOrCreate()
+
+# Create Rdd
+data = [("1","john"),("2","tracey smith")]
+col = ["seqno","name"]
+rdd = sc.sparkContext.parallelize(data)
+print(rdd.take(5))
+
+# Convert to df :
+
+# can do this method also
+
+df = rdd.toDF(col)
+df.show()
+
+# or :
+
+from pyspark.sql import Row
+df = rdd.map(lambda x: Row(Seqno = x[0],Name = x[1])).toDF()
+df.show()
+
+# Capitalize first letter
+
+def capitalize (s):
+  if s:
+    return s.title()
+  else:
+    return s
+
+# Normal python function cannot be used for pyspark datafram so converting to udf 
+from pyspark.sql.functions import udf
+from pyspark.sql.types import StringType
+
+udf_func = udf (capitalize,StringType())
+
+# Applying func
+
+transformed_df = df.withColumn("Name",udf_func(df["Name"]))
+transformed_df.show()
