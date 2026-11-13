@@ -1,0 +1,11 @@
+!pip install pyspark
+from pyspark.sql import SparkSession
+sc = SparkSession.builder.appName("Word_conut").getOrCreate()
+text_file = sc.read.text("text.txt")
+words = text_file.rdd.flatMap(lambda x: x.value.split(" "))
+word_count = (words.count())
+print(word_count)
+
+# flatmap : 
+# ["hello","reva"]
+# map:[["hello world"]]
