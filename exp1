@@ -6,3 +6,16 @@ import java.util.StringTokenizer;
 import org.apache.hadoop.io.IntWritable; //Int
 import org.apache.hadoop.io.LongWritable; //Long
 import org.apache.hadoop.io.Text; //String
+
+//Map and Reduce:
+
+import org.apache.hadoop.mapred.MapReduceBase;
+
+//Mapper
+import org.apache.hadoop.mapred.Mapper;
+
+//Collect output
+import org.apache.hadoop.mapred.OutputCollector;
+
+//Report results
+import org.apache.hadoop.mapred.Reporter;
