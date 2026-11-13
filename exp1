@@ -19,3 +19,11 @@ import org.apache.hadoop.mapred.OutputCollector;
 
 //Report results
 import org.apache.hadoop.mapred.Reporter;
+
+// Creating class:
+
+public class WC_Mapper extends MapReduceBase
+implements Mapper <LongWritable,Text,Text,IntWritable>
+{
+    
+}
