@@ -1,0 +1,8 @@
+//IOException to handle Input output Error
+import java.io.IOException;
+//StringTokenizer used to split sentence into words
+import java.util.StringTokenizer;
+// Hadoop DataTypes:
+import org.apache.hadoop.io.IntWritable; //Int
+import org.apache.hadoop.io.LongWritable; //Long
+import org.apache.hadoop.io.Text; //String
