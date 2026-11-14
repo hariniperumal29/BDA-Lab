@@ -90,5 +90,11 @@ implements Reducer <Text,IntWritable,Text,IntWritable>
 //(text,iterator [count values],output collector,reporter)
     public class Reducer (Text key,Iterator<IntWritable> values,OutputCollector<Text,IntWritable>output,Reporter reporter)throws IOException{
             
+        while (value.hasNext())
+        {
+            sum+=value.next().get();
+        }
+        output.collect(key,new IntWritable(sum));
+    
     } 
 }
