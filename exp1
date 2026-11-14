@@ -66,3 +66,29 @@ String line = value.toString();
 
 }
 }
+
+--------------------------------------------------------------------------------------------
+REDUCER CLASS:
+reduce and sum
+--------------------------------------------------------------------------------------------
+
+import java.io.IOException;
+//Iterate through value one by one
+import java.util.Iterator;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+
+import org.apache.hadoop.mapred.MapReduceBase;
+import org.apache.hadoop.mapred.Reducer;
+import org.apache.mapred.OutputCollector;
+import org.apache.mapred.Reporter;
+
+public class WC_Reducer extends MapReduceBase
+implements Reducer <Text,IntWritable,Text,IntWritable>
+{// Reduce Func :
+//(text,iterator [count values],output collector,reporter)
+    public class Reducer (Text key,Iterator<IntWritable> values,OutputCollector<Text,IntWritable>output,Reporter reporter)throws IOException{
+            
+    } 
+}
