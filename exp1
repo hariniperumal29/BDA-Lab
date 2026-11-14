@@ -116,8 +116,18 @@ public class Runner
 {
     public static void main (String args[])throws IOException
     {
-        //Tells hadoop which class to use as reference for loading job configuration
+        
+
+//Tells hadoop which class to use as reference for loading job configuration
         JobConf conf = new JobConf(Runner.class);
+        //Key : word
+        //Value: count
+        conf.setOutputKeyClass (Text.class);
+        conf.setOutputValueClass(IntWritable.class);
+
+        conf.setMapperClass(WC_Mapper.class);
+        conf.setCombinerClass(WC_Reducer.class);
+        conf.setReducerClass(WC_Reducer.class);
 
     }
 }
