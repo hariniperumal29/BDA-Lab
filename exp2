@@ -1,0 +1,17 @@
+// Reducer , Runner same :
+
+// only change in body of Mapper:
+
+public void Map(LongWritable key, Text value,OutputCollector<Text,IntWritable>output, Reporter reporter)throws IOException
+{
+//convert Hadoop string to java string
+String line = value.toString();
+//string array with splited bsed on space
+
+String tokenizer[] = line.split(" ");
+
+for (String c: tokenizer)
+{
+Text character = new Text(c);
+IntWritable one = new IntWritable(1);
+output.collect(character,one);
