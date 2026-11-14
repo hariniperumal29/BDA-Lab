@@ -25,5 +25,44 @@ import org.apache.hadoop.mapred.Reporter;
 public class WC_Mapper extends MapReduceBase
 implements Mapper <LongWritable,Text,Text,IntWritable>
 {
-    
+/ Mapper assigns key value pair : all words to 1
+// creating a varible one with value 1 .
+//--> final : cannot be reassigned
+//--> static : belongs to class
+//--> private : belongs to class
+private final static IntWritable one = new IntWritable(1);
+// To store curr word
+private Text word = new Text ();
+
+// Function for mapping
+// public       → Access specifier
+// void         → Return type
+// map          → Function name
+// Parameters   → Input information
+
+// key          → Beginning position (byte offset) of the input line
+// value        → Entire input line (not just one word)
+// output       → Collects output as (word, count)
+// report       → Reports status and progress
+
+public void map(
+    LongWritable key,
+    Text value,
+    OutputCollector<Text, IntWritable> output,
+    Reporter report
+) throws IOException {
+
+//Converting value which is in text to java string
+String line = value.toString();
+// We are coonverting becuse String tokenizer works only with java strings
+ StringTokenizer tokenizer = new StringTokenizer (line);
+//spliting line to words
+
+ while (tokenizer.hasMoreTokens()) // check if words exists
+        {
+            word.set(tokenizer.nextToken()); // stored the wored in variable word
+            output.collect(word,one);// collects res
+        }
+
+}
 }
