@@ -5,3 +5,41 @@ import org.apache.hadoop.io.LongWritable;
 //Null values
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
+
+
+//Configure and sumbit job
+import org.apache.hadoop.mapreduce.Job;
+// Map operation
+import org.apache.hadoop.mapreduce.Mapper;
+//Reduce Operation
+import org.apache.hadoop.mapreduce.Reducer;
+
+
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+// Tells hadoop where to save the output
+import org.apache.hadoop.mapreduc.lib.output.FileOutputFormat;
+
+
+
+public class SortStudNames
+{
+    // Creating our own Mapper class by extending Hadoop Mapper
+    // <Input Key, Input Value, Output Key, Output Value>
+    //Output all in Text
+
+    public static class SortMapper
+        extends Mapper<LongWritable, Text, Text, Text>
+    {
+
+// own mapper function
+        protected void map (LongWritable key,Text value,Context context)throws IOException,InterruptedException
+{
+// Split based on ,
+            String [] token = value.toString().split(",");
+            // sends output to hadoop (text,roll + name)
+            context.write(new Text (token[0]), new Text (token [1] + "-" + token[0]));
+}
+    }
+
+    }
+}
