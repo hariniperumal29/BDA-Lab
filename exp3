@@ -41,5 +41,37 @@ public class SortStudNames
 }
     }
 
+ public static class SortReducer extends Reducer <Text,Text,NullWritable,Text>
+    {
+        protected void reduce (Text key, Iterable<Text> values,Context context)throws IOException,InterruptedException
+        {
+            for (Text i : values)
+            {
+                context.write(NullWritable.get(),i);
+            }
+        }
     }
+
+    }
+
+
+public static void main (String [] args)throws IOException,InterurptedException,ClassNotFoundException
+{ //Configuration
+    Configuration conf = new Configuration();
+    //Create new job using configuration
+    Job job = new Job(conf);
+    job.setJarByClass(SortStudStudnets.class);
+    //set reduce and mapper class
+
+    job.setMapperClass(SortMapper.class);
+    job.setReducerClass(SortReducer.class);
+
+    job.setOutputKeyClass(NullWritable.class);
+    job.setOutputValueClass(Text.class);
+
+    //Setting input path 
+    FileInputFormat.setInputPaths(job,new Path("input.csv"));
+    FileOutputFormat.setOutputPath(job,new Path("output"));
+
+    System.exit(job.waitForCompletion(true)?0:1);
 }
